@@ -1,0 +1,70 @@
+/* "My PCs" menu: trigger in the top bar plus a popover list. Tokens only, so light and dark follow styles.css. */
+.bm { position: relative; display: inline-block; max-width: 100%; min-width: 0; }
+
+/* The trigger takes its look from .aboutbtn.surf, like About and Settings; only the open state and sizing are added here. */
+.bm-trigger { max-width: 100%; }
+.bm-trigger[aria-expanded="true"] { color: var(--fg); }
+.bm-name { min-width: 0; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bm-chev { width: 14px; height: 14px; flex: none; transition: transform .2s var(--ease); }
+.bm-trigger[aria-expanded="true"] .bm-chev { transform: rotate(180deg); }
+
+.bm-pop {
+  position: absolute; z-index: 20; top: calc(100% + 6px); right: 0;
+  width: min(340px, calc(100vw - 32px)); max-height: min(460px, 70vh); overflow: auto; padding: 6px;
+  border-radius: var(--r-md); background: var(--surface); color: var(--fg);
+  box-shadow: 0 0 0 1px var(--border), var(--shadow); animation: bm-in .18s var(--ease) both;
+}
+@keyframes bm-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+.bm-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.bm-item { border-radius: var(--r-sm); padding: 2px 0; }
+.bm-item[data-active="true"] { background: var(--accent-soft); }
+
+.bm-pick {
+  display: flex; align-items: center; gap: 8px; width: 100%; min-height: 36px; padding: 6px 8px;
+  border: 0; border-radius: var(--r-sm); background: none; cursor: pointer; text-align: left; font-size: var(--t-md); color: var(--fg);
+}
+.bm-pick:hover { background: var(--surface-2); }
+.bm-pick[aria-current="true"] { font-weight: 600; }
+.bm-pick-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bm-check { width: 14px; height: 14px; flex: none; color: var(--accent); visibility: hidden; }
+.bm-pick[aria-current="true"] .bm-check { visibility: visible; }
+
+.bm-badge, .bm-active {
+  flex: none; padding: 1px 6px; border-radius: 999px; white-space: nowrap;
+  font-family: var(--mono); font-size: var(--t-xs); color: var(--muted); box-shadow: inset 0 0 0 1px var(--border);
+}
+.bm-active { color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+
+.bm-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 0 8px 4px 30px; }
+.bm-act {
+  min-height: 28px; padding: 4px 8px; border: 0; border-radius: 6px; background: none; cursor: pointer;
+  font-size: var(--t-sm); font-weight: 500; color: var(--muted);
+}
+.bm-act:hover { color: var(--fg); background: var(--surface-2); }
+.bm-act.bm-danger, .bm-danger { color: var(--fail); }
+.bm-act.bm-yes { color: var(--fail); background: var(--fail-bg); font-weight: 600; }
+.bm-act.bm-yes:hover { background: var(--fail-bg); filter: brightness(.97); }
+
+.bm-confirm { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: var(--t-sm); }
+.bm-confirm > span { flex-basis: 100%; color: var(--fg); overflow-wrap: anywhere; }
+
+.bm-foot {
+  display: flex; flex-direction: column; gap: 2px; margin-top: 4px; padding: 6px 2px 2px; border-top: 1px solid var(--border);
+}
+.bm-foot-btn {
+  min-height: 34px; padding: 6px 8px; border: 0; border-radius: var(--r-sm); background: none; cursor: pointer; text-align: left;
+  font-size: var(--t-md); font-weight: 500; color: var(--accent);
+}
+.bm-foot-btn:hover { background: var(--surface-2); }
+.bm-foot-btn.bm-danger:hover { background: var(--fail-bg); }
+.bm-foot-confirm { padding: 4px 6px 6px; }
+
+button.bm-pick:focus-visible, button.bm-act:focus-visible, button.bm-foot-btn:focus-visible { outline-offset: -2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bm-pop { animation: none; }
+  .bm-chev { transition: none; }
+}
+
+@media (max-width: 560px) { .bm-name { max-width: 90px; } }

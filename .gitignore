@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+*.tsbuildinfo
+
+# Local overrides and secrets
+*.local
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test and tool caches
+coverage
+.vite
+.vitest
+
+# OS and editors
+.DS_Store
+.idea
+.vscode/*
+!.vscode/extensions.json

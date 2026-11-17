@@ -1,0 +1,101 @@
+name: PR
+run-name: CI
+
+# Pre-deploy checks: PR title, typecheck, tests and build. Pull requests run it
+# directly ("CI"); pushes to main run it through main.yml (workflow_call), which
+# passes `deploy: true` so the built site is uploaded for the Pages deploy job.
+# `edited` re-validates the PR title when it changes; that run only executes the
+# pr-title job and has its own concurrency group, so editing a PR never cancels
+# a running check.
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+  workflow_call:
+    inputs:
+      deploy:
+        description: Also upload the built site (dist/) as the GitHub Pages artifact
+        type: boolean
+        default: false
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}-${{ github.event.action == 'edited' && 'title' || 'code' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  # The squash-merge commit takes the PR title, so it must be a Conventional
+  # Commit (feat:, fix:, docs:, chore:, feat!: ...). Pull requests only: skipped
+  # when this workflow is reused by main.yml.
+  pr-title:
+    name: Validate conventional commit title
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # The Linux leg is the local gate (`make ci`). The build output is relative-path
+  # (works on any domain or sub-path), so it is uploaded as-is for Pages.
+  site:
+    name: Typecheck, tests and build
+    if: github.event.action != 'edited'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Run tests
+        run: npm test
+      - name: Build
+        run: npm run build
+      - name: Upload the site to GitHub Pages
+        if: inputs.deploy
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  # One table with the outcome of every job of this run. Runs even when a job
+  # failed or was skipped. Not for the `edited` run, which only validates the title.
+  overview:
+    name: Overview
+    needs: [pr-title, site]
+    if: always() && github.event.action != 'edited'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Summarize the run
+        env:
+          PR_TITLE: ${{ needs.pr-title.result }}
+          SITE: ${{ needs.site.result }}
+          DEPLOY: ${{ inputs.deploy }}
+        run: |
+          icon() {
+            case "$1" in
+              success) echo "✅" ;;
+              failure) echo "❌" ;;
+              cancelled) echo "🚫" ;;
+              *) echo "⏭️" ;;
+            esac
+          }
+          {
+            echo "## Overview"
+            echo
+            echo "| Job | Result |"
+            echo "|---|---|"
+            echo "| Validate conventional commit title | $(icon "$PR_TITLE") |"
+            echo "| Typecheck, tests and build | $(icon "$SITE") |"
+            if [ "$DEPLOY" = true ]; then echo; echo "The site was uploaded to GitHub Pages."; fi
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,14 @@
+{
+  "onboarding": false,
+  "buildMenu": false,
+  "aboutButton": false,
+  "themeToggle": true,
+  "settingsButton": true,
+  "languageSetting": true,
+  "fpsLimit": true,
+  "simControls": true,
+  "airflow": false,
+  "heatmap": true,
+  "cameraControls": true,
+  "upgradesTab": false
+}

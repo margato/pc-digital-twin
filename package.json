@@ -1,0 +1,46 @@
+{
+  "name": "pc-digital-twin",
+  "private": true,
+  "description": "True-scale 3D digital twin of a gaming PC: parts, power, heat and airflow what-if lab.",
+  "license": "GPL-3.0-or-later",
+  "author": "Osvaldo Margato (https://github.com/margato)",
+  "keywords": [
+    "three.js",
+    "react-three-fiber",
+    "digital-twin",
+    "pc-hardware",
+    "3d"
+  ],
+  "version": "11.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.109.5",
+    "@react-three/fiber": "^8.17.10",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.7.0",
+    "three": "^0.164.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.164.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "husky": "^9.1.7",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.4"
+  }
+}

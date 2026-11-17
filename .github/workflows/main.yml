@@ -1,0 +1,42 @@
+# Pipeline for every push to main: runs the pre-deploy checks (pr.yml, reused as
+# a workflow) and, when they pass, deploys the site built in that same run to
+# GitHub Pages (nothing is rebuilt). Can also be started by hand.
+name: Main
+run-name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Pre-deploy checks
+    permissions:
+      contents: read
+      pull-requests: read
+    uses: ./.github/workflows/pr.yml
+    with:
+      deploy: true
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: checks
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

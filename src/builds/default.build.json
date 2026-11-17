@@ -1,0 +1,258 @@
+{
+  "version": 1,
+  "id": "default",
+  "name": "Gaming PC",
+  "description": {
+    "en": "Default gaming PC, an example setup",
+    "pt": "PC gamer padrão, um setup de exemplo"
+  },
+  "parts": {
+    "cpu": [
+      {
+        "spec": "cpu-intel-i7-12700k",
+        "qty": 1
+      }
+    ],
+    "gpu": [
+      {
+        "spec": "gpu-asus-prime-rtx5080-oc",
+        "qty": 1
+      }
+    ],
+    "board": [
+      {
+        "spec": "board-asus-tuf-z690-plus-d4",
+        "qty": 1
+      }
+    ],
+    "ram": [
+      {
+        "spec": "ram-kingston-fury-renegade-8gb-ddr4-4000",
+        "qty": 4
+      }
+    ],
+    "ssd": [
+      {
+        "spec": "ssd-kingston-kc3000-1tb",
+        "qty": 1
+      }
+    ],
+    "psu": [
+      {
+        "spec": "psu-xpg-core-reactor-ii-ve-850",
+        "qty": 1
+      }
+    ],
+    "cooler": [
+      {
+        "spec": "cooler-masterliquid-pl360-flux",
+        "qty": 1
+      }
+    ],
+    "case": [
+      {
+        "spec": "case-nzxt-h7",
+        "qty": 1
+      }
+    ]
+  },
+  "upgradesNote": {
+    "en": "Ranked for your build and how you use it: 4K 120 Hz gaming on the TV.",
+    "pt": "Ordenado pelo seu PC e pelo seu uso: jogos em 4K 120 Hz na TV."
+  },
+  "upgrades": [
+    {
+      "rank": 1,
+      "title": {
+        "en": "Add a 2 TB NVMe SSD",
+        "pt": "Adicione um SSD NVMe de 2 TB"
+      },
+      "priority": {
+        "en": "High",
+        "pt": "Alta"
+      },
+      "cls": "p-hi",
+      "impact": {
+        "en": "Big",
+        "pt": "Grande"
+      },
+      "cost": {
+        "en": "Low",
+        "pt": "Baixo"
+      },
+      "effort": {
+        "en": "Easy",
+        "pt": "Fácil"
+      },
+      "why": {
+        "en": "The 1 TB drive fills with three or four big games; one install you did was 112 GB. The board has three free PCIe 4.0 M.2 slots, so this adds about 6 W and needs nothing else.",
+        "pt": "A unidade de 1 TB enche com três ou quatro jogos grandes; uma das instalações que você fez teve 112 GB. A placa-mãe tem três slots M.2 PCIe 4.0 livres, então isso adiciona cerca de 6 W e não exige mais nada."
+      },
+      "swap": {
+        "addSsd": "ssd-generic-2tb-gen4"
+      }
+    },
+    {
+      "rank": 2,
+      "title": {
+        "en": "Balance fan curves and keep filters clean",
+        "pt": "Equilibre as curvas das ventoinhas e mantenha os filtros limpos"
+      },
+      "priority": {
+        "en": "Medium",
+        "pt": "Média"
+      },
+      "cls": "p-md",
+      "impact": {
+        "en": "Medium",
+        "pt": "Médio"
+      },
+      "cost": {
+        "en": "Free",
+        "pt": "Grátis"
+      },
+      "effort": {
+        "en": "Easy",
+        "pt": "Fácil"
+      },
+      "why": {
+        "en": "The top radiator fans draw air in through a narrow slit, which the simulation treats as restricting them to about 35%. Even so, estimated intake is about 201 CFM against 52 CFM out at full speed, so pressure is clearly positive. Dust enters through the front and the slit, so clean them often. Raise the rear fan a little to balance it and push warm air out faster.",
+        "pt": "As ventoinhas superiores do radiador puxam ar por uma fresta estreita, que a simulação trata como limitando-as a cerca de 35%. Mesmo assim, a entrada estimada é de cerca de 201 CFM contra 52 CFM de saída em velocidade máxima, então a pressão é claramente positiva. A poeira entra pela frente e pela fresta, então limpe tudo com frequência. Aumente um pouco a ventoinha traseira para equilibrar e expulsar o ar quente mais rápido."
+      },
+      "air": true
+    },
+    {
+      "rank": 3,
+      "title": {
+        "en": "Core i7-14700K on the same board",
+        "pt": "Core i7-14700K na mesma placa-mãe"
+      },
+      "priority": {
+        "en": "Medium-low",
+        "pt": "Média-baixa"
+      },
+      "cls": "p-md",
+      "impact": {
+        "en": "Medium in CPU-heavy games",
+        "pt": "Médio em jogos pesados de CPU"
+      },
+      "cost": {
+        "en": "Medium",
+        "pt": "Médio"
+      },
+      "effort": {
+        "en": "Moderate",
+        "pt": "Moderado"
+      },
+      "why": {
+        "en": "At 4K 120 Hz the RTX 5080 is usually the limit, so gains show mostly in high-fps or simulation games. Needs a BIOS update first. Estimated peak power rises about 60 W, and the 850 W PSU still has room.",
+        "pt": "Em 4K 120 Hz a RTX 5080 costuma ser o limite, então os ganhos aparecem mais em jogos de alto fps ou de simulação. Precisa de uma atualização de BIOS antes. A potência máxima estimada sobe cerca de 60 W, e a fonte de 850 W ainda tem folga."
+      },
+      "swap": {
+        "cpu": "cpu-intel-i7-14700k"
+      }
+    },
+    {
+      "rank": 4,
+      "title": {
+        "en": "Platform change: Ryzen 7 9800X3D",
+        "pt": "Mudança de plataforma: Ryzen 7 9800X3D"
+      },
+      "priority": {
+        "en": "Low",
+        "pt": "Baixa"
+      },
+      "cls": "p-lo",
+      "impact": {
+        "en": "Big in CPU-heavy games",
+        "pt": "Grande em jogos pesados de CPU"
+      },
+      "cost": {
+        "en": "High",
+        "pt": "Alto"
+      },
+      "effort": {
+        "en": "Big",
+        "pt": "Grande"
+      },
+      "why": {
+        "en": "The strongest gaming CPU option, but it needs a new AM5 board and DDR5 memory, so the current board and RAM can not be reused.",
+        "pt": "A melhor opção de CPU para jogos, mas exige uma placa AM5 nova e memória DDR5, então a placa-mãe e a RAM atuais não podem ser reaproveitadas."
+      },
+      "swap": {
+        "cpu": "cpu-amd-ryzen-7-9800x3d",
+        "board": "board-generic-x870-ddr5",
+        "ram": {
+          "spec": "ram-generic-16gb-ddr5-6000",
+          "qty": 2
+        }
+      }
+    },
+    {
+      "rank": 5,
+      "title": {
+        "en": "64 GB of RAM",
+        "pt": "64 GB de RAM"
+      },
+      "priority": {
+        "en": "Low",
+        "pt": "Baixa"
+      },
+      "cls": "p-lo",
+      "impact": {
+        "en": "Small for games",
+        "pt": "Pequeno para jogos"
+      },
+      "cost": {
+        "en": "Medium",
+        "pt": "Médio"
+      },
+      "effort": {
+        "en": "Easy",
+        "pt": "Fácil"
+      },
+      "why": {
+        "en": "32 GB covers current games. Only worth it for heavy multitasking, local AI models or video work.",
+        "pt": "32 GB atendem aos jogos atuais. Só vale a pena para multitarefa pesada, modelos de IA locais ou edição de vídeo."
+      },
+      "swap": {
+        "ram": {
+          "spec": "ram-generic-16gb-ddr4-3600",
+          "qty": 4
+        }
+      }
+    },
+    {
+      "rank": 6,
+      "title": {
+        "en": "New PSU",
+        "pt": "Nova fonte"
+      },
+      "priority": {
+        "en": "Not needed",
+        "pt": "Não necessária"
+      },
+      "cls": "p-no",
+      "impact": {
+        "en": "None today",
+        "pt": "Nenhum hoje"
+      },
+      "cost": {
+        "en": "—",
+        "pt": "—"
+      },
+      "effort": {
+        "en": "—",
+        "pt": "—"
+      },
+      "why": {
+        "en": "The 850 W ATX 3.1 supply with a native 12V-2x6 cable covers the RTX 5080 with headroom. Only an RTX 5090 would call for 1000 W.",
+        "pt": "A fonte ATX 3.1 de 850 W com cabo 12V-2x6 nativo atende a RTX 5080 com folga. Só uma RTX 5090 exigiria 1000 W."
+      },
+      "swap": {
+        "gpu": "gpu-nvidia-rtx-5090",
+        "psu": "psu-generic-1000-gold"
+      }
+    }
+  ]
+}
